@@ -42,6 +42,11 @@ A partir de los grupos almacenados en un _FrameStack_ podremos crear nuestras an
 
 Como los fotogramas ya están almacenados en el _FrameStack_, en el _AnimationStack_ no se guardan otra vez, simplemente contiene vectores con índices a los grupos. Además, podremos intercambiar el _FrameStack_ de un _AnimationStack_, esto podría permitir tener un único juego de animaciones para todas las posibles representaciones de un personaje, por ejemplo.
 
-Cuando tenemos un _AnimationStack_ podremos crear dos tipos de animaciones lineales a partir de un grupo en un _FrameStack_:
-  * Loop
-  * Ping-pong
+Cuando tenemos un _AnimationStack_ podremos crear tres tipos de animaciones lineales a partir de un grupo en un _FrameStack_:
+  * Loop (secuencia lineal de los fotogramas de un grupo)
+  * Ping-pong (generado a partir de un loop)
+  * Inversa (fotogramas en orden contrario)
+
+Cada animación dentro de un _AnimationStack_ también será referenciado por su nombre.
+
+En PCE, todos los elementos dibujables (o _Drawables_) se crean a partir de un _AnimationStack_.
