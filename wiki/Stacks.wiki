@@ -1,13 +1,14 @@
-#summary One-sentence summary of this page.
+#summary Stacks.
 
-= Introduction =
+= Stacks =
 
-Add your content here.
+Como ya se ha explicado, los _stacks_ almacenan todo el contenido _multimedia_ de una aventura PCE. Por tanto, utilizaremos los _stacks_ para cargar los gráficos y los sonidos de una aventura.
 
+Aunque en esencia sean lo mismo, la forma de utilizarlo es muy diferente según el tipo de elemento que almacenen.
 
-= Details =
+  Evidentemente este diseño podría resultar _inadecuado_ desde el punto de    vista de la programación orientada a objetos, pero no hay que olvidar que pretendemos crear un programa capaz de correr más o menos rápido en máquinas normales. Utilizar un lenguaje interpretado ya supone suficiente penalización de velocidad como para estar creando jerarquías de herencias de muchos niveles.
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Así pues distinguimos dos tipos de _stacks_
+
+* _FrameStack_
+* _SoundStack_
