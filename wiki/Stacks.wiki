@@ -12,3 +12,5 @@ Así pues distinguimos dos tipos de _stacks_:
 
   * _FrameStack_
   * _SoundStack_
+
+El primer tipo maneja todos los fotogramas usados por los elementos de los _registers_. El segundo almacena todos los efectos de sonido.
