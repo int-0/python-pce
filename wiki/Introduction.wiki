@@ -1,3 +1,4 @@
+#summary Introducción a PCE.
 
 = Introducción =
 
