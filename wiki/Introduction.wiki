@@ -14,7 +14,7 @@ He llegado a esta idea refinando una serie de ideas, realizando algunos prototip
 
 == Estructura de PCE ==
 
-  # [http://code.google.com/p/python-pce/wiki/ElementosPrincipales]Elementos principales
+  # Elementos principales[http://code.google.com/p/python-pce/wiki/ElementosPrincipales]
     # _Stacks_
     # _Registers_
 
