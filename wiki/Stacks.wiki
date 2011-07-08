@@ -10,8 +10,8 @@ Aunque en esencia sean lo mismo, la forma de utilizarlo es muy diferente según 
 
 Así pues distinguimos dos tipos de _stacks_:
 
+  * _[Stacks#SoundStack SoundStack]_
   * _FrameStack_
-  * _SoundStack_
 
 El primer tipo maneja todos los fotogramas usados por los elementos de los _registers_. El segundo almacena todos los efectos de sonido. Por razones de simplicidad y eficiencia, es recomendable usar un único _SoundStack_ por escena. En cambio, aunque suponga una penalización en el consumo de memoria, será recomendable usar varios _FrameStack_ por cada elemento de la escena.
 
