@@ -14,7 +14,7 @@ He llegado a esta idea refinando una serie de ideas, realizando algunos prototip
 
 == Estructura de PCE ==
 
-  # [Elementos Principales]
+  # [ElementosPrincipales Elementos Principales]
     # _Stacks_
     # _Registers_
 
