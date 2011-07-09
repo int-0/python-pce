@@ -6,7 +6,7 @@ La filosofía que intenta seguir PCE es agrupar el contenido de una aventura en 
 
 = Repositorios en PCE =
 
-Existen dos tipos principales de repositorios: _[Stacks stacks]_ y _registers_. La diferencia principal es simple: los elementos de los _stacks_ no tienen ninguna _inteligencia_, en cambio los elementos de un _registry_ tienen cierta _inteligencia_.
+Existen dos tipos principales de repositorios: _[Stacks stacks]_ y _[Registries registries]_. La diferencia principal es simple: los elementos de los _stacks_ no tienen ninguna _inteligencia_, en cambio los elementos de un _registry_ tienen cierta _inteligencia_.
 
 La segunda diferencia principal es que un juego en PCE puede tener (y tendrá) muchos _stacks_ del mismo tipo. En cambio sólo podrá tener un único _registry_ para cada tipo.
 
