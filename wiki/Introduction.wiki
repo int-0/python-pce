@@ -16,7 +16,7 @@ He llegado a esta idea refinando una serie de ideas, realizando algunos prototip
 
   # [ElementosPrincipales Elementos Principales]
     # _[Stacks Stacks]_
-    # _Registers_
+    # _[Registers Registers]_
 
   # Clases
     # Eventos
