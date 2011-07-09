@@ -43,3 +43,6 @@ class SoundStack(object):
         if self.__sounds.has_key(name):
             del(self.__sounds[name])
 
+    # Event listener
+    def event_receiver(self, event):
+        pass
