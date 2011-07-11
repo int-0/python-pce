@@ -43,7 +43,7 @@ class OrderedRenderUpdates(RenderClear):
 
     def draw(self, surface):
         spritelist = sorted(self.spritelist,
-                            key = lambda drawable: drawable.pos.bottom)
+                            key = lambda drawable: drawable.rect.bottom)
         spritedict = self.spritedict
         surface_blit = surface.blit
         dirty = self.lostsprites

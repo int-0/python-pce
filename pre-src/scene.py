@@ -13,7 +13,7 @@ class Scene(object):
         self.bg = bg
         self.fg = mask
 
-        self.__item_resitry = ItemRegistry()
+        #self.__item_resitry = ItemRegistry()
 
         self.__dirty = []
         self.__attrezo = {}

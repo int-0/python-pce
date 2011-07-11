@@ -33,4 +33,3 @@ class Registry(object):
     # Event forwarding
     def event_receiver(self, event):
         self.__channel.send(event)
-

@@ -74,6 +74,8 @@ class Drawable(pygame.sprite.Sprite):
         self.image = self.animations.stack.frames[self.animation[self.frame]]
 
         self.rect = self.image.get_rect()
+        self.pos = self.rect.topleft
+
         self.dest = destination_surface
         if not self.dest is None:
             self.area = self.dest.get_rect()
@@ -83,7 +85,7 @@ class Drawable(pygame.sprite.Sprite):
         self.event = None
 
     def set_pos(self, pos):
-        self.rect.topleft = pos
+        self.pos = pos
 
     def set_event(self, event):
         self.event = event
@@ -97,6 +99,7 @@ class Drawable(pygame.sprite.Sprite):
         self.frame = 0
         self.image = self.animations.stack.frames[self.animation[self.frame]]
         self.rect = self.image.get_rect()
+        self.rect.topleft = pos
 
     def update(self):
         self.frame = self.frame + 1
@@ -106,6 +109,7 @@ class Drawable(pygame.sprite.Sprite):
             self.frame = 0
         self.image = self.animations.stack.frames[self.animation[self.frame]]
         self.rect = self.image.get_rect()
+        self.rect.topleft = self.pos
 
 # From prefix name, generates frame stack and animation stack with loop frames
 #
