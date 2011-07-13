@@ -13,3 +13,4 @@ Las operaciones de añadir/eliminar elementos de un _registry_ se realizan de fo
 Actualmente estos son los tipos de _registries_ creados en PCE:
 
   * _ItemRegistry_
+  * _ActorRegistry_
