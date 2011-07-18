@@ -71,6 +71,8 @@ class Drawable(pygame.sprite.Sprite):
         self.frame = 0
         self.animations = anim_stack
         self.animation = self.animations.get_animation(initial)
+        self.current_animation = initial
+        
         self.image = self.animations.stack.frames[self.animation[self.frame]]
 
         self.rect = self.image.get_rect()
@@ -94,12 +96,17 @@ class Drawable(pygame.sprite.Sprite):
         self.dest = destination_surface
         self.area = self.dest.get_rect()
 
-    def change_animation(self, animation):
-        self.animation = self.animations.get_animation(animation)
+    def restart_animation(self):
         self.frame = 0
         self.image = self.animations.stack.frames[self.animation[self.frame]]
         self.rect = self.image.get_rect()
-        self.rect.topleft = pos
+        self.rect.topleft = self.pos
+        
+    def change_animation(self, animation):
+        if animation == self.current_animation:
+          return
+        self.animation = self.animations.get_animation(animation)
+        self.restart_animation()
 
     def update(self):
         self.frame = self.frame + 1
