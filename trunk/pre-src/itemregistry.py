@@ -23,9 +23,12 @@ class ItemRegistry(object):
         return setattr(self.__instance, aAttr, avalue)
 
     def process_event(self, event):
-        # Disable event forwarding for items
-        # Items can be modified only by items
-        return True
+        operation = event.get('op', None)
+       # Ignore malformed events
+        if operation is None:
+            return True
+        # Forward valid events
+        return False
 
 if __name__ == '__main__':
     class DummyEventChannel:

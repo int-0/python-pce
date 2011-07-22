@@ -9,10 +9,11 @@ class Registry(object):
 
     def add(self, name, item):
         self.registry[name] = item
-        self.__channel.add_subscriptor(name, item.event_receiver)
+        self.__channel.add_subscriptor(name, item)
 
     def remove(self, name):
         del(self.registry[name])
+        self.__channel.remove_subscriptor(name)
 
     def elements(self):
         return self.registry.keys()
@@ -27,15 +28,13 @@ class Registry(object):
     def __call__(self, name):
         return self.get(name)
 
-    def set_event_channel(self, channel):
-        self.__channel = channel
-
     # Event forwarding
     def event_receiver(self, event):
-        # Forward only if event is not processed
+        # Forward only if event is not processed by registry
         if not self.process_event(event):
             self.__channel.send(event)
 
-    # Overwrite method to process particular events
+    # Overwrite method to process particular events (by default
+    # registries forward all events)
     def process_event(self, event):
         return False
