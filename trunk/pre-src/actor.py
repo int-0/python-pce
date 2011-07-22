@@ -91,4 +91,5 @@ class Actor(Drawable):
         pass
 
     def update(self):
+        Drawable.update(self)
         self.cycles += 1
