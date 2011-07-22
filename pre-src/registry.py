@@ -32,4 +32,10 @@ class Registry(object):
 
     # Event forwarding
     def event_receiver(self, event):
-        self.__channel.send(event)
+        # Forward only if event is not processed
+        if not self.process_event(event):
+            self.__channel.send(event)
+
+    # Overwrite method to process particular events
+    def process_event(self, event):
+        return False
