@@ -87,8 +87,11 @@ class Actor(Drawable):
     def talk(self):
         pass
 
-    def event_receiver(self, event):        
-        pass
+    def event_receiver(self, event):
+        op = event.get('op', None)
+        # Ignore malformed events
+        if op is None:
+            return
 
     def update(self):
         Drawable.update(self)

@@ -39,4 +39,16 @@ class Item(Drawable):
         self.__state_stubs.update({state : data})
 
     def event_receiver(self, event):
-        pass
+        operation = event.get('op', None)
+        if operation is None:
+            return
+
+        # Event next_state
+        if operation == 'next_state':
+            self.next_state()
+            return
+
+        # Event goto_state. Parameter: { state:<state_name> }
+        if operation == 'goto_state':
+            self.goto_state(event.get('state', 'initial'))
+            return
