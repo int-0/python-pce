@@ -22,6 +22,11 @@ class ItemRegistry(object):
     def __setattr__(self, aAttr, avalue):
         return setattr(self.__instance, aAttr, avalue)
 
+    def process_event(self, event):
+        # Disable event forwarding for items
+        # Items can be modified only by items
+        return True
+
 if __name__ == '__main__':
     class DummyEventChannel:
         def add_subscriptor(self, name, callback):
