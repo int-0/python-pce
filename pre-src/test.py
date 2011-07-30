@@ -13,6 +13,7 @@ from events import EventChannel
 from framestack import FrameStack
 from animstack import AnimationStack
 from animstack import Drawable
+from actor import Actor
 
 def load_image(fullname):
     try:
@@ -54,7 +55,16 @@ def main():
                                  'next_state' : 'active' })
     ttpie.set_pos((300, 400))
     items.add('ttpie', ttpie)
-                                 
+
+    # Load actors
+    tory_frames = FrameStack('test_data/tory_static')
+    tory_frames.load_group('walk_o', 'test_data/tory_walk')
+    tory_frames.load_group('action_o', 'test_data/tory_action')
+    tory_frames.copy_group('walk_o', 'walk_e')
+    tory_frames.vflip_group('walk_e')
+    tory_anim = AnimationStack(tory_frames)
+    tory = Actor(tory_anim)
+
     # Create The Backgound
     background = pygame.Surface(screen.get_size())
     background = background.convert()
