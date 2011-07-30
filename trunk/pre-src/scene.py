@@ -5,6 +5,8 @@ import os
 import os.path
 import pygame
 from pygame.locals import *
+
+from events import EventChannel
 from orderedrender import OrderedRenderUpdates
 from itemregistry import ItemRegistry
 
@@ -13,7 +15,8 @@ class Scene(object):
         self.bg = bg
         self.fg = mask
 
-        #self.__item_resitry = ItemRegistry()
+        self.__events = EventChannel()
+        self.__items = ItemRegistry(self.__events)
 
         self.__dirty = []
         self.__attrezo = {}
@@ -35,7 +38,7 @@ class Scene(object):
         for sprite in self.__attrezo.values():
             self.__sprites.add(sprite)
         for sprite in self.__objects:
-            self.__sprites.add(self.__item_registry.get_item(sprite))
+            self.__sprites.add(self.__items.get(sprite))
 
     # FIXME: check allready added
     def show_item(self, name):
