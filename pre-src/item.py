@@ -12,7 +12,7 @@ class ItemStateError(Exception):
 
 class Item(Drawable):
     def __init__(self, anim_stack, state = 'initial'):
-        Drawable.__init__(anim_stack)
+        Drawable.__init__(self, anim_stack)
 
         self.__state = state
         self.__state_stubs = {
@@ -23,10 +23,10 @@ class Item(Drawable):
 
     def goto_state(self, state):
         self.__state = state
-        self.change_animation(self.__state['animation'])
+        self.change_animation(self.__state_stubs[self.__state]['animation'])
 
     def next_state(self):
-        self.goto_state(self.__state_stubs['next_state'])
+        self.goto_state(self.__state_stubs[self.__state]['next_state'])
 
     def get_state(self):
         return self.__state

@@ -6,6 +6,7 @@ import os.path
 import pygame
 from pygame.locals import *
 from orderedrender import OrderedRenderUpdates
+from item import Item
 from itemregistry import ItemRegistry
 from scene import Scene
 from events import EventChannel
@@ -31,7 +32,7 @@ def main():
 
     # Create game objects
     events = EventChannel()
-    registry = ItemRegistry(events)
+    items = ItemRegistry(events)
 
     # Load objects
     arcade_frames = FrameStack('test_data/arcade')
@@ -39,6 +40,21 @@ def main():
     arcade = Drawable(arcade_anim)
     arcade.set_pos((400, 100))
 
+    # Load items
+    ttpie_frames = FrameStack('test_data/ttpie_static_')
+    ttpie_frames.load_group('action', 'test_data/ttpie')
+    ttpie_anim = AnimationStack(ttpie_frames)
+    ttpie_anim.make_loop('action', 'action')
+    ttpie = Item(ttpie_anim)
+    ttpie.set_state('active', { 'handler' : None,
+                                'animation' : 'action',
+                                'next_state' : 'initial' })
+    ttpie.set_state('initial', { 'handler' : None,
+                                 'animation' : 'initial',
+                                 'next_state' : 'active' })
+    ttpie.set_pos((300, 400))
+    items.add('ttpie', ttpie)
+                                 
     # Create The Backgound
     background = pygame.Surface(screen.get_size())
     background = background.convert()
@@ -59,6 +75,9 @@ def main():
 
     # Add objects to scene
     scene.set_attrezo(arcade, 'arcade')
+
+    # Enable items in scene
+    scene.show_item('ttpie')
 
     # Main Loop
     while 1:
