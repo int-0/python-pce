@@ -3,8 +3,8 @@
 
 from animstack import Drawable
 
-ACTOR_WALK_X = 1
-ACTOR_WALK_Y = 1
+ACTOR_WALK_X = 5
+ACTOR_WALK_Y = 5
 
 class Actor(Drawable):
     def __init__(self, initial_anim_stack):
@@ -97,7 +97,7 @@ class Actor(Drawable):
         # Ignore malformed events
         if op is None:
             return
-        print 'Received event:', event
+        #print 'Received event:', event
         if event['op'] == 'walk_to':
             self.cancel_all_actions()
             self.do_action({'op' : 'walk_to',
