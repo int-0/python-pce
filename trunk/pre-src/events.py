@@ -23,8 +23,8 @@ class EventChannel(object):
                 cb(event)
         else:
             for subscriptor in destinations:
-                if self.has_subscriptor(destination):
-                    self.__subscriptors[destination](event)
+                if self.has_subscriptor(subscriptor):
+                    self.__subscriptors[subscriptor](event)
 
 # class Event(object):
 #     def __init__(self, channel):

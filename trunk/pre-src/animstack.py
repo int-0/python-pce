@@ -21,7 +21,8 @@ class AnimationStack:
     def __init__(self, stack_frame):
         self.stack = stack_frame
         self.__anims = {}
-        self.make_loop('initial', 'initial')
+        for group in self.stack.groups.keys():
+            self.make_loop(group, group)
 
     def change_frames(self, new_sf):
         self.stack = new_sf
@@ -32,6 +33,7 @@ class AnimationStack:
     def make_loop(self, frame_group, animation):
         if not self.stack.group_exists(frame_group):
             raise BadAnimationStack('Animation stack not found: ' + frame_group)
+        print animation, 'is', self.stack.get_group(frame_group)
         self.__anims[animation] = self.stack.get_group(frame_group)
 
     def convert_pingpong(self, animation):
@@ -98,6 +100,7 @@ class Drawable(pygame.sprite.Sprite):
 
     def restart_animation(self):
         self.frame = 0
+        print 'StackFrame:', self.animation[self.frame], '(', len(self.animations.stack.frames), ')'
         self.image = self.animations.stack.frames[self.animation[self.frame]]
         self.rect = self.image.get_rect()
         self.rect.topleft = self.pos

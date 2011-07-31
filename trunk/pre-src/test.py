@@ -47,7 +47,6 @@ def main():
     ttpie_frames = FrameStack('test_data/ttpie_static_')
     ttpie_frames.load_group('action', 'test_data/ttpie')
     ttpie_anim = AnimationStack(ttpie_frames)
-    ttpie_anim.make_loop('action', 'action')
     ttpie = Item(ttpie_anim)
     ttpie.set_state('active', { 'handler' : None,
                                 'animation' : 'action',
@@ -60,10 +59,18 @@ def main():
 
     # Load actors
     tory_frames = FrameStack('test_data/tory_static')
-    tory_frames.load_group('walk_o', 'test_data/tory_walk')
+    tory_frames.load_group('WALK_O', 'test_data/tory_walk')
+    tory_frames.load_group('WALK_ON', 'test_data/tory_uwalk')
+    tory_frames.copy_group('WALK_ON', 'WALK_N')
+    tory_frames.copy_group('WALK_ON', 'WALK_EN')
+    tory_frames.vflip_group('WALK_EN')
+    tory_frames.copy_group('WALK_O', 'WALK_E')
+    tory_frames.vflip_group('WALK_E')
+    tory_frames.copy_group('WALK_O', 'WALK_S')
+    tory_frames.copy_group('WALK_O', 'WALK_OS')
+    tory_frames.copy_group('WALK_O', 'WALK_ES')
+    tory_frames.vflip_group('WALK_ES')
     tory_frames.load_group('action_o', 'test_data/tory_action')
-    tory_frames.copy_group('walk_o', 'walk_e')
-    tory_frames.vflip_group('walk_e')
     tory_anim = AnimationStack(tory_frames)
     tory = Actor(tory_anim)
     tory.set_pos((500, 400))
@@ -100,6 +107,15 @@ def main():
 
         # Handle Input Events
         for event in pygame.event.get():
+            if event.type == MOUSEBUTTONUP:
+                if event.button == 1:
+                    # Generate syntethic event
+                    move_event = {
+                        'dest' : ['tory'],
+                        'op' : 'walk_to',
+                        'position' : event.pos
+                        }
+                    scene.fire_event(move_event)
             if event.type == QUIT:
                 return
             elif event.type == KEYDOWN and event.key == K_ESCAPE:

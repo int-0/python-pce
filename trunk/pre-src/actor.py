@@ -17,7 +17,11 @@ class Actor(Drawable):
             'usr_vars' : {}
             }
         self.cycles = 0
-        self.displacement = (0, 0)
+        #self.displacement = (0, 0)
+
+    # def set_pos(self, pos):
+    #     Drawable.set_post(self, pos)
+    #     self.state['actual_position'] = pos
 
     def set_var(self, var_name, value):
         self.state['usr_vars'][var_name] = value
@@ -55,7 +59,7 @@ class Actor(Drawable):
             self.cycles = 0
 
     def walk(self):
-        desired_pos = self.state['actual_action']['position']
+        desired_pos = self.state['actual_action']['destination']
 
         # Check if action finished       
         if desired_pos == self.pos:
@@ -66,22 +70,23 @@ class Actor(Drawable):
         direction = 'WALK_'
         if desired_pos[0] > self.pos[0]:
             direction += 'E'
-            self.displacement[0] = ACTOR_WALK_X
+            new_pos_X = self.pos[0] + ACTOR_WALK_X
         elif desired_pos[0] < self.pos[0]:
             direction += 'O'
-            self.displacement[0] = -ACTOR_WALK_X
+            new_pos_X = self.pos[0] - ACTOR_WALK_X
         else:
-            self.displacement[0] = 0
+            new_pos_X = self.pos[0]
         if desired_pos[1] > self.pos[1]:
             direction += 'S'
-            self.displacement[1] = ACTOR_WALK_Y
+            new_pos_Y = self.pos[1] + ACTOR_WALK_Y
         elif desired_pos[1] < self.pos[1]:
             direction += 'N'
-            self.displacement[1] = -ACTOR_WALK_Y
+            new_pos_Y = self.pos[1] - ACTOR_WALK_Y
         else:
-            self.displacement[1] = 0
+            new_pos_Y = self.pos[1]
 
         # Select apropiate animation
+        self.set_pos((new_pos_X, new_pos_Y))
         self.change_animation(direction)
 
     def talk(self):
@@ -92,7 +97,21 @@ class Actor(Drawable):
         # Ignore malformed events
         if op is None:
             return
+        print 'Received event:', event
+        if event['op'] == 'walk_to':
+            self.cancel_all_actions()
+            self.do_action({'op' : 'walk_to',
+                            'destination' : event['position'],
+                            'handler' : self.walk })
 
     def update(self):
+        # Nothing to do? check for new actions!
+        if self.state['actual_action'] == self.state['standby_action']:
+            self.next_action()
+        # Perform current action
+        else:
+            handler = self.state['actual_action'].get('handler', None)
+            if not handler is None:
+                handler()
         Drawable.update(self)
         self.cycles += 1
