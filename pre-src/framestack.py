@@ -34,15 +34,13 @@ class FrameStack:
             yield filename
 
     def load_group(self, group_name, basename):
-        self.frames = []
-        nframe = 0
         group = []
         for filename in self.__get_filenames(basename):
             if not os.path.exists(filename):
                 break
-            self.frames.append(self.__load_image(filename))
-            group.append(nframe)
-            nframe += 1
+            frame = self.__load_image(filename)
+            self.frames.append(frame)
+            group.append(self.frames.index(frame))
         self.groups[group_name] = group
 
     def group_exists(self, group):
