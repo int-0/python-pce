@@ -8,6 +8,7 @@ from pygame.locals import *
 from orderedrender import OrderedRenderUpdates
 from item import Item
 from itemregistry import ItemRegistry
+from actorregistry import ActorRegistry
 from scene import Scene
 from events import EventChannel
 from framestack import FrameStack
@@ -34,6 +35,7 @@ def main():
     # Create game objects
     events = EventChannel()
     items = ItemRegistry(events)
+    actors = ActorRegistry(events)
 
     # Load objects
     arcade_frames = FrameStack('test_data/arcade')
@@ -64,6 +66,8 @@ def main():
     tory_frames.vflip_group('walk_e')
     tory_anim = AnimationStack(tory_frames)
     tory = Actor(tory_anim)
+    tory.set_pos((500, 400))
+    actors.add('tory', tory)
 
     # Create The Backgound
     background = pygame.Surface(screen.get_size())
@@ -88,6 +92,7 @@ def main():
 
     # Enable items in scene
     scene.show_item('ttpie')
+    scene.show_actor('tory')
 
     # Main Loop
     while 1:
