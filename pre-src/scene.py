@@ -25,6 +25,9 @@ class Scene(object):
         self.__objects = []
         self.__sprites = OrderedRenderUpdates()
 
+    def fire_event(self, event):
+        self.__events.send(event)
+
     def update(self):
         self.__sprites.update()
 
@@ -49,20 +52,24 @@ class Scene(object):
     def show_item(self, name):
         self.__objects.append(name)
         self.__update_group()
+        self.__events.add_subscriptor(name, self.__items.get(name))
 
     # FIXME: check availability
     def hide_item(self, name):
         del(self.__objects[name])
+        self.__events.remove_subscriptor(name)
         self.__update_group()
 
     # FIXME: check allready added
     def show_actor(self, name):
         self.__objects.append(name)
-        self.__update_group()
+        self.__update_group()        
+        self.__events.add_subscriptor(name, self.__actors.get(name))
 
     # FIXME: check availability
     def hide_actor(self, name):
         del(self.__objects[name])
+        self.__events.remove_subscriptor(name)
         self.__update_group()
 
     def set_attrezo(self, drawable, name):
