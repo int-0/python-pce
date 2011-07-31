@@ -21,6 +21,9 @@ class Registry(object):
     def get(self, name):
         return self.registry[name]
 
+    def exists(self, name):
+        return self.registry.has_key(name)
+
     def iterate(self):
         for item in self.registry.values():
             yield item

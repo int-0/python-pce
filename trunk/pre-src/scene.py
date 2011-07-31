@@ -9,6 +9,7 @@ from pygame.locals import *
 from events import EventChannel
 from orderedrender import OrderedRenderUpdates
 from itemregistry import ItemRegistry
+from actorregistry import ActorRegistry
 
 class Scene(object):
     def __init__(self, bg, mask = None):
@@ -17,6 +18,7 @@ class Scene(object):
 
         self.__events = EventChannel()
         self.__items = ItemRegistry(self.__events)
+        self.__actors = ActorRegistry(self.__events)
 
         self.__dirty = []
         self.__attrezo = {}
@@ -38,7 +40,10 @@ class Scene(object):
         for sprite in self.__attrezo.values():
             self.__sprites.add(sprite)
         for sprite in self.__objects:
-            self.__sprites.add(self.__items.get(sprite))
+            if self.__items.exists(sprite):
+                self.__sprites.add(self.__items.get(sprite))
+            elif self.__actors.exists(sprite):
+                self.__sprites.add(self.__actors.get(sprite))
 
     # FIXME: check allready added
     def show_item(self, name):
@@ -47,6 +52,16 @@ class Scene(object):
 
     # FIXME: check availability
     def hide_item(self, name):
+        del(self.__objects[name])
+        self.__update_group()
+
+    # FIXME: check allready added
+    def show_actor(self, name):
+        self.__objects.append(name)
+        self.__update_group()
+
+    # FIXME: check availability
+    def hide_actor(self, name):
         del(self.__objects[name])
         self.__update_group()
 
