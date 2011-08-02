@@ -77,7 +77,7 @@ class Drawable(pygame.sprite.Sprite):
         self.image = self.animations.stack.frames[self.animation[self.frame]]
 
         self.rect = self.image.get_rect()
-        self.pos = self.rect.topleft
+        self.pos = self.rect.midbottom
 
         self.dest = destination_surface
         if not self.dest is None:
@@ -101,7 +101,7 @@ class Drawable(pygame.sprite.Sprite):
         self.frame = 0
         self.image = self.animations.stack.frames[self.animation[self.frame]]
         self.rect = self.image.get_rect()
-        self.rect.topleft = self.pos
+        self.rect.midbottom = self.pos
         
     def change_animation(self, animation):
         if animation == self.current_animation:
@@ -118,7 +118,7 @@ class Drawable(pygame.sprite.Sprite):
             self.frame = 0
         self.image = self.animations.stack.frames[self.animation[self.frame]]
         self.rect = self.image.get_rect()
-        self.rect.topleft = self.pos
+        self.rect.midbottom = self.pos
 
 # From prefix name, generates frame stack and animation stack with loop frames
 #
